@@ -1,4 +1,4 @@
-
+import random
 
 # Dictionary of songs mapped to moods and levels
 song_recommendations = {
@@ -102,50 +102,23 @@ song_recommendations = {
     }
 }
 
-
-
-
-import random
-
-def recommend_song(mood, level):
-    # Check if the mood exists in the dictionary
+# Function to recommend a song
+def recommend_song(mood, level=1):
+    """
+    Recommends a song based on the user's mood and intensity level.
+    
+    Args:
+        mood (str): The user's mood (e.g., "Happy", "Sad").
+        level (int): The intensity level (1, 2, or 3).
+    
+    Returns:
+        str: A recommended song or an error message.
+    """
+    mood = mood.capitalize()  # Ensure mood is capitalized
     if mood in song_recommendations:
-        # Check if the level exists for the mood
         if level in song_recommendations[mood]:
-            # Pick a random song from the list
             return random.choice(song_recommendations[mood][level])
         else:
             return "Invalid level. Please choose a level between 1 and 3."
     else:
         return "Invalid mood. Please choose a valid mood."
-
-
-
-
-def main():
-    print("Welcome to the Mood-Based Song Recommender!")
-    while True:
-        # Get user input
-        mood = input("Enter your mood (e.g., Happy, Sad): ").strip().capitalize()
-        level = int(input("Enter the intensity level (1-3): ").strip())
-        
-        # Recommend a song
-        recommendation = recommend_song(mood, level)
-        print(recommendation)
-        
-        # Ask if the user wants another recommendation
-        again = input("Do you want another recommendation? (yes/no): ").strip().lower()
-        if again != "yes":
-            print("Thank you for using the Mood-Based Song Recommender!")
-            break
-
-# Run the program
-if __name__ == "__main__":
-    main()
-
-
-
-
-
-
-
